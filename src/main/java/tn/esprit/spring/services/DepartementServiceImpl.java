@@ -19,5 +19,7 @@ public class DepartementServiceImpl implements IDepartementService {
 	public List<Departement> getAllDepartements() {
 		return (List<Departement>) deptRepoistory.findAll();
 	}
+	
+	
 
 }

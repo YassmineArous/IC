@@ -23,7 +23,7 @@ import tn.esprit.spring.repository.TimesheetRepository;
 public class EmployeServiceImpl implements IEmployeService {
 
 	@Autowired
-	EmployeRepository employeRepository;
+	public EmployeRepository employeRepository;
 	@Autowired
 	DepartementRepository deptRepoistory;
 	@Autowired
@@ -35,19 +35,38 @@ public class EmployeServiceImpl implements IEmployeService {
 	public Employe authenticate(String login, String password) {
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
 	}
+	
+	public String auth2(String login, String password){
+		Employe em=employeRepository.getEmployeByEmailAndPassword(login, password);
+		if(em==null)	
+		return null;
+		else 
+		return em.getEmail();
+	
+	}
+	
+	
+	
+	/*
+	public void testauthenticate(){
+		Assert.assertEquals(employeRepository.getEmployeByEmailAndPassword("ll@ll.net", "firas"),authenticate("ll@ll.net","firas"));
+		
+		
+	}*/
 
 	@Override
 	public int addOrUpdateEmploye(Employe employe) {
 		employeRepository.save(employe);
 		return employe.getId();
 	}
+	
+	
 
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
 		employeRepository.save(employe);
-
 	}
 
 	@Transactional	
