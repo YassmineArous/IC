@@ -3,7 +3,9 @@ package tn.esprit.spring.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +31,20 @@ public class Contrat implements Serializable {
 	
 	private float telephone;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Employe employe;
+
+	public Contrat(int reference, Date dateDebut, String typeContrat, float telephone, Employe employe, float salaire) {
+		super();
+		this.reference = reference;
+		this.dateDebut = dateDebut;
+		this.typeContrat = typeContrat;
+		this.telephone = telephone;
+		this.employe = employe;
+		this.salaire = salaire;
+	}
+
+
 
 	private float salaire;
 
@@ -38,11 +52,6 @@ public class Contrat implements Serializable {
 		super();
 	}
 	
-	public Contrat(Date dateDebut, String typeContrat, float salaire) {
-		this.dateDebut = dateDebut;
-		this.typeContrat = typeContrat;
-		this.salaire = salaire;
-	}
 
 
 	public Date getDateDebut() {
@@ -84,6 +93,28 @@ public class Contrat implements Serializable {
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
 	}
+
+	public Contrat( Date dateDebut, String typeContrat, float telephone, Employe employe, float salaire) {
+		super();
+	
+		this.dateDebut = dateDebut;
+		this.typeContrat = typeContrat;
+		this.telephone = telephone;
+		this.employe = employe;
+		this.salaire = salaire;
+	}
+
+
+
+	public Contrat(Date dateDebut, String typeContrat, float telephone, float salaire) {
+		super();
+	
+		this.dateDebut = dateDebut;
+		this.typeContrat = typeContrat;
+		this.telephone = telephone;
+		this.salaire = salaire;
+	}
+	
 	
 	
 }
