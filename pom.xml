@@ -113,13 +113,16 @@
 
 	</dependencies>
 
+<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+	</build>
 
-
-	<repositories>
-		<repository>
-			<id>maven-group</id>
-			<url>http://localhost:8081/repository/maven-releases</url>
-		</repository>
-	</repositories>
+	
 
 </project>

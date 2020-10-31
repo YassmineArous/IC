@@ -113,16 +113,16 @@
 
 	</dependencies>
 
-
-
-	<build>
-		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 	</build>
+
+	
 
 </project>
