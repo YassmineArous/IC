@@ -123,6 +123,11 @@
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 	</build>
 
-	
+	<repositories>
+		<repository>
+			<id>maven-group</id>
+			<url>http://localhost:8081/repository/maven-releases</url>
+		</repository>
+	</repositories>
 
 </project>
