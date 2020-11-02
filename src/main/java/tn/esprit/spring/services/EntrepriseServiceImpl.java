@@ -3,6 +3,8 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +22,12 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Autowired
 	DepartementRepository deptRepoistory;
 	
+private static final Logger l =LogManager.getLogger(EntrepriseServiceImpl.class);
+	
 	public int ajouterEntreprise(Entreprise entreprise) {
+		l.info("in addEntreprise :"+ entreprise);
 		entrepriseRepoistory.save(entreprise);
+		l.info("out of addEntreprise ");
 		return entreprise.getId();
 	}
 
@@ -56,7 +62,9 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
+		l.info("in deleteEntrepriseById :"+ entrepriseId);
 		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
+		l.info("out deleteEntrepriseById");
 	}
 
 	@Transactional
@@ -64,9 +72,32 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
 	}
 
-
-	public Entreprise getEntrepriseById(int entrepriseId) {
-		return entrepriseRepoistory.findById(entrepriseId).get();	
+	public Departement getDepartementById(int depId){
+		return deptRepoistory.findById(depId).get();
 	}
+	
+	public Entreprise getEntrepriseById(int entrepriseId) {
+		return entrepriseRepoistory.findById(entrepriseId).get();
+		
+	}
+	
+	
+	public Entreprise UpdateNomEntrepriseById(String NomEntreprise , int entrepriseId){
+		l.info("in updateEntrepriseNom ");
+		Entreprise ent = entrepriseRepoistory.findById(entrepriseId).get();
+		ent.setName(NomEntreprise);
+		l.info("nom Entreprise updated :"+ NomEntreprise);
+		entrepriseRepoistory.save(ent);
+		l.info("out updateEntrepriseNom ");
+		return ent ;
+	}
+	 
+	public List<Entreprise> getAllEntreprise (){
+		l.info("in getAllEntreprise :");
+		List<Entreprise> list =(List<Entreprise>)entrepriseRepoistory.findAll();
+		l.info("out of getAllEntreprise");
+		return list ;
+	}
+
 
 }
